@@ -1,5 +1,5 @@
 function getSessionList(success, error) {
-  var soql = "SELECT Session__c.Id, Session__c.Name FROM Session__c";
+  var soql = "SELECT Id, Name, Session_Date__c, Level__c FROM Session__c";
   force.query(soql, success, error);
 }
 
