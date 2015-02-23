@@ -9,7 +9,7 @@ function getSessionDetails(sessionId, success, error) {
   "Speaker__r.First_Name__c, " +
   "Speaker__r.Last_Name__c " +
   "FROM Session_Speaker__c " +
-  "WHERE Session__c.Id = '" + sessionId + "'";
+  "WHERE Session__r.Id = '" + sessionId + "'";
   force.query(soql, success, error);
 }
 
