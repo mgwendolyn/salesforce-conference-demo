@@ -4,8 +4,8 @@ function getSessionList(success, error) {
 }
 
 function getSessionDetails(sessionId, success, error) {
-  var soql = "SELECT Session__c.Name, " +
-  "Session__c.Session_Date__c, " +
+  var soql = "SELECT Session__r.Name, " +
+  "Session__r.Session_Date__c, " +
   "Speaker__r.First_Name__c, " +
   "Speaker__r.Last_Name__c " +
   "FROM Session_Speaker__c " +
