@@ -4,12 +4,12 @@ function getSessionList(success, error) {
 }
 
 function getSessionDetails(sessionId, success, error) {
-  var soql = "SELECT Session__r.Name, " +
-  "Session__r.Session_Date__c, " +
+  var soql = "SELECT Name, " +
+  "Session_Date__c, " +
   "Speaker__r.First_Name__c, " +
   "Speaker__r.Last_Name__c " +
-  "FROM Session_Speaker__c " +
-  "WHERE Session__r.Id = '" + sessionId + "'";
+  "FROM Session__c " +
+  "WHERE Session__c.Id = '" + sessionId + "'";
   force.query(soql, success, error);
 }
 
@@ -53,14 +53,14 @@ function showSessionDetails(sessionId) {
                     '<div class="card">' +
                         '<ul class="table-view">' +
                             '<li class="table-view-cell">' +
-                                '<h4>' + session.Session__r.Name + '</h4>' +
-                                '<p>' + (session.Session__r.Session_Date__c || 'No time yet')+ '</p>' +
+                                '<h4>' + session.Name + '</h4>' +
+                                '<p>' + (session.Session_Date__c || 'No time yet')+ '</p>' +
                             '</li>' +
                             '<li class="table-view-cell">Speaker: ' +
-                                session.Speaker__r.First_Name__c +
+                                session.Speaker__r.First_Name__c + ' ' + session.Speaker_r.Last_Name__c +
                             '</li>' +
                             '<li class="table-view-cell">' +
-                                (session.Session__r.Description__c || 'No description yet') +
+                                (session.Description__c || 'No description yet') +
                             '</li>' +
                         '</ul>' +
                     '</div>' +
