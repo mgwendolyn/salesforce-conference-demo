@@ -1,5 +1,5 @@
 function getSessionList(success, error) {
-  var soql = "SELECT Session__r.Id, Session__r.Name FROM Session_Speaker__c";
+  var soql = "SELECT Id, Name, Session_Date__c, Level__c FROM Session__c";
   force.query(soql, success, error);
 }
 
@@ -19,7 +19,7 @@ function showSessionList() {
             var sessions = data.records,
                 html = '';
             for (var i=0; i<sessions.length; i++) {
-                html += '<li class="table-view-cell"><a href="#sessions/'+ sessions[i].Session__r.Id +'">' + sessions[i].Session__r.Name + '</a></li>';
+                html += '<li class="table-view-cell"><a href="#sessions/'+ sessions[i].Id +'">' + sessions[i].Name + ' - ' + sessions[i].Level__c + ' - ' + sessions[i].Session_Date__c + '</a></li>';
             }
             html =
                 '<div class="page">' +
@@ -43,6 +43,8 @@ function showSessionDetails(sessionId) {
     getSessionDetails(sessionId,
         function (data) {
             var session = data.records[0],
+            var sessionspeakers = data.records,
+             html = '';
             html =
                 '<div class="page">' +
                 '<header class="bar bar-nav">' +
@@ -57,7 +59,8 @@ function showSessionDetails(sessionId) {
                                 '<p>' + (session.Session__r.Session_Date__c || 'No time yet')+ '</p>' +
                             '</li>' +
                             '<li class="table-view-cell">Speaker: ' +
-                                session.Speaker__r.First_Name__c +
+              for (var i=0, i<sessionspeakers.length; i++) {
+                                sessionspeakers[i].Speaker__r.First_Name__c + sessionspeakers[i].Speaker__r.Last_Name__c + }
                             '</li>' +
                             '<li class="table-view-cell">' +
                                 (session.Session__r.Description__c || 'No description yet') +
