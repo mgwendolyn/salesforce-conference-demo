@@ -43,6 +43,9 @@ function showSessionDetails(sessionId) {
     getSessionDetails(sessionId,
         function (data) {
             var session = data.records[0],
+            var sessionspeakers = data.records,
+             html = '';
+            for (var i=0, i<sessionspeakers.length; i++)
             html =
                 '<div class="page">' +
                 '<header class="bar bar-nav">' +
@@ -57,7 +60,7 @@ function showSessionDetails(sessionId) {
                                 '<p>' + (session.Session__r.Session_Date__c || 'No time yet')+ '</p>' +
                             '</li>' +
                             '<li class="table-view-cell">Speaker: ' +
-                                session.Speaker__r.First_Name__c +
+                                sessionspeakers[i].Speaker__r.First_Name__c + sessionspeakers[i].Speaker__r.Last_Name__c +
                             '</li>' +
                             '<li class="table-view-cell">' +
                                 (session.Session__r.Description__c || 'No description yet') +
